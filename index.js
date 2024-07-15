@@ -181,51 +181,55 @@ btn.addEventListener("click",()=>{
 
     let stock_name=search.value;
 
-    const url = `https://twelve-data1.p.rapidapi.com/quote?symbol=${stock_name}&outputsize=30&format=json&interval=1day`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': 'c0e897e06bmshf1b07b02427bc79p1edb79jsn0132d0db5ef9',
-            'x-rapidapi-host': 'twelve-data1.p.rapidapi.com'
-        }
-    };
-
-    try{
-        async function getdata(){
-            // Fetch Stock US Data
-            const response = await fetch(url, options);
-            const result = await response.json();
-            if(result["code"]==404){
-                    // Fetch Stock Indian Data if not exists in US
-                    const url = `https://indian-stock-exchange-api2.p.rapidapi.com/stock?name=${stock_name}`;
-                    const options = {
-                        method: 'GET',
-                        headers: {
-                            'x-rapidapi-key': 'c0e897e06bmshf1b07b02427bc79p1edb79jsn0132d0db5ef9',
-                            'x-rapidapi-host': 'indian-stock-exchange-api2.p.rapidapi.com'
-                        }
-                    };
-                    async function getindiandata(){
-                        const response = await fetch(url, options);
-                        const result = await response.json();
-                        if(result["error"]=="Stock not found"){
-                            alert("Stock Data Not Available");    
-                        }
-                        else{
-                            showStockData(result["companyProfile"]["exchangeCodeNse"],result["companyName"],result["stockDetailsReusableData"]["percentChange"],result["stockDetailsReusableData"]["price"],result["futureOverviewData"]["open"],result["stockDetailsReusableData"]["high"],result["stockDetailsReusableData"]["low"],result["stockDetailsReusableData"]["close"],result["futureOverviewData"]["volume"],2)
-                        }
-                    } 
-                    getindiandata();
-            }
-            else{
-               showStockData(result["symbol"],result["name"],result["change"],null,result["open"],result["high"],result["low"],result["close"],result["volume"],1)        
-            }
-        }
-        getdata()
+    if(stock_name.length==0){
+        alert("Provide a valid stock name.");
     }
-    catch{
-        alert("Invalid Stock Symbol!")
+    else{
+
+        const url = `https://twelve-data1.p.rapidapi.com/quote?symbol=${stock_name}&outputsize=30&format=json&interval=1day`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': 'c0e897e06bmshf1b07b02427bc79p1edb79jsn0132d0db5ef9',
+                'x-rapidapi-host': 'twelve-data1.p.rapidapi.com'
+            }
+        };
+
+        try{
+            async function getdata(){
+                // Fetch Stock US Data
+                const response = await fetch(url, options);
+                const result = await response.json();
+                if(result["code"]==404){
+                        // Fetch Stock Indian Data if not exists in US
+                        const url = `https://indian-stock-exchange-api2.p.rapidapi.com/stock?name=${stock_name}`;
+                        const options = {
+                            method: 'GET',
+                            headers: {
+                                'x-rapidapi-key': 'c0e897e06bmshf1b07b02427bc79p1edb79jsn0132d0db5ef9',
+                                'x-rapidapi-host': 'indian-stock-exchange-api2.p.rapidapi.com'
+                            }
+                        };
+                        async function getindiandata(){
+                            const response = await fetch(url, options);
+                            const result = await response.json();
+                            if(result["error"]=="Stock not found"){
+                                alert("Stock Data Not Available");    
+                            }
+                            else{
+                                showStockData(result["companyProfile"]["exchangeCodeNse"],result["companyName"],result["stockDetailsReusableData"]["percentChange"],result["stockDetailsReusableData"]["price"],result["futureOverviewData"]["open"],result["stockDetailsReusableData"]["high"],result["stockDetailsReusableData"]["low"],result["stockDetailsReusableData"]["close"],result["futureOverviewData"]["volume"],2)
+                            }
+                        } 
+                        getindiandata();
+                }
+                else{
+                showStockData(result["symbol"],result["name"],result["change"],null,result["open"],result["high"],result["low"],result["close"],result["volume"],1)        
+                }
+            }
+            getdata()
+        }
+        catch{
+            alert("Invalid Stock Symbol!")
+        }
     }
 })
-
-// <!-- https://www.alphavantage.co/documentation/, apikey=07BSXLBCXWCJ1N37 -->
