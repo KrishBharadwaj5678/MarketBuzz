@@ -163,11 +163,11 @@ div.overflow{
     
     div.top-header{
         width: 90vw;
-        height: 10vw;
+        height: 13vw;
     }
     
     h1.stock_market{
-        font-size: 4.8vw;
+        font-size: 5.3vw;
         margin: 1vw 0vw 0.7vw 0vw;
     }
 
@@ -185,21 +185,21 @@ div.overflow{
     
     input.stocks{
         width: 65vw;
-        height: 8.3vw;
+        height: 9.3vw;
         border-radius: 0.6vw;
-        font-size: 3.9vw;
+        font-size: 4.2vw;
         padding: 0vw 0vw 0vw 3.2vw;
         margin: 2vw auto 0vw auto;
     }
     
     button.btn{
-        width: 20vw;
-        height: 8.2vw;
-        font-size: 4.1vw;
+        width: 22vw;
+        height: 10vw;
+        font-size: 4.8vw;
         line-height: 4.8vw;
         border-radius: 1vw;
         display: block; 
-        margin: 3.3vw auto 0vw auto;
+        margin: 4vw auto 0vw auto;
     }
 
     div.stock-details{
@@ -229,7 +229,7 @@ div.overflow{
     
     th.cols,td.rows{
         padding: 2.4vw;
-        font-size: 4.8vw;
+        font-size: 4.3vw;
     }
 
     div.main2{
@@ -238,7 +238,7 @@ div.overflow{
     }
 
     h3.global-market{
-        font-size: 6.8vw;
+        font-size: 6vw;
     }
     
     table.global-market-table,table.gainers-losers{
